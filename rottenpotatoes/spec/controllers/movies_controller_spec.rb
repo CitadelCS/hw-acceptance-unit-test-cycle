@@ -32,12 +32,29 @@ describe MoviesController, type: 'controller' do
                 expect(assigns(:director)).to eq 'yo mamma'
             end
         end
-        describe 'mvoie has no director' do
+        describe 'movie has no director' do
             it 'should redirect to the homepage with a sad message' do
                 movie = double('fake movie').as_null_object
                 expect(Movie).to receive(:find).with("1").and_return(movie)
                 get :search_directors, { id:1 }
                 expect(response).to redirect_to movies_path
+            end
+        end
+    end
+    context '#create' do
+        describe '#create' do
+            it 'will create a new movie' do 
+              movie = {:title =>"Hello World"}
+              post :create, {:movie => movie}
+              expect(response).to redirect_to movies_path
+            end
+        end
+        describe '#destroy' do
+            it 'will destroy a movie' do
+                @dummyMovie = Movie.create(:title =>"Hello World")
+                allow(Movie).to receive(:find).with('1').and_return(@dummyMovie)
+                allow(Movie).to receive(:destroy)
+                get :destroy, { id: 1 }
             end
         end
     end
