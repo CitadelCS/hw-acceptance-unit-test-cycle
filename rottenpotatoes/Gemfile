@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '>= 2.4.0'
+ruby '>= 2.4.0', '<3.0'
 gem 'rails', '4.2.10'
 
 # for Heroku deployment - as described in Ap. A of ELLS book
@@ -15,6 +15,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'simplecov', :require => false
   gem 'cucumber-rails', :require => false
   gem 'cucumber-rails-training-wheels'
 end
